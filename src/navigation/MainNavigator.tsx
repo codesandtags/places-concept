@@ -7,7 +7,7 @@ import { Admin, Map, NewPlace, PlaceDetail, PlacesList } from './routes';
 // Screens
 import MapScreen from '../screens/MapScreen';
 import NewPlaceScreen, { optionsNewPlace } from '../screens/NewPlaceScreen';
-import PlaceDetailScreen from '../screens/PlaceDetailScreen';
+import PlaceDetailScreen, { optionsPlaceDetail } from '../screens/PlaceDetailScreen';
 import PlacesListScreen, { optionsPlaceList } from '../screens/PlacesListScreen';
 import { Button } from 'react-native-paper';
 import Colors from '../constants/Colors';
@@ -45,18 +45,23 @@ const MainNavigator = () => {
                 screenOptions={defaultScreenOptions}>
                 <PlacesStackNavigator.Screen
                     name={Map}
-                    component={MapScreen} />
+                    component={MapScreen}
+                />
                 <PlacesStackNavigator.Screen
                     name={NewPlace}
                     component={NewPlaceScreen}
-                    options={optionsNewPlace}/>
+                    options={optionsNewPlace}
+                />
                 <PlacesStackNavigator.Screen
                     name={PlaceDetail}
-                    component={PlaceDetailScreen}/>
+                    component={PlaceDetailScreen}
+                    options={optionsPlaceDetail}
+                />
                 <PlacesStackNavigator.Screen
                     name={PlacesList}
                     component={PlacesListScreen}
-                    options={optionsPlaceList}/>
+                    options={optionsPlaceList}
+                />
             </PlacesStackNavigator.Navigator>
         </NavigationContainer>
     )

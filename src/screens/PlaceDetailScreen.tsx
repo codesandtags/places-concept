@@ -17,6 +17,15 @@ const PlaceDetailScreen = (props: Props) => {
     )
 };
 
+export const optionsPlaceDetail = (props: any) => {
+    console.log(props);
+    const place = props.route.params.place;
+
+    return {
+        title: place.title,
+    }
+}
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,

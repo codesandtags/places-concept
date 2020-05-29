@@ -5,7 +5,8 @@ import Colors from '../constants/Colors';
 import { Place } from '../models/Place';
 
 type Props = {
-    place: Place
+    place: Place,
+    onSelect: Function
 };
 
 const PlaceItem = (props: Props) => {
@@ -18,7 +19,7 @@ const PlaceItem = (props: Props) => {
                     <Image
                         style={styles.placeImage}
                         source={{
-                            uri:'https://www.sohohotel.ca/wp-content/uploads/2019/10/things-to-do-in-toronto-part-1-256x256.jpg'
+                            uri: place.image
                         }}
                     />
                 </View>

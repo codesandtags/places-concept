@@ -1,35 +1,41 @@
-import React from 'react';
-import {
-    FlatList, Image,
-    ListRenderItemInfo,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { FlatList, ListRenderItemInfo, StyleSheet, Text, View } from 'react-native';
 import { Place } from '../models/Place';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../models/RootState';
 import Colors from '../constants/Colors';
 import { Button, IconButton } from 'react-native-paper';
-import { NewPlace } from '../navigation/routes';
+import { NewPlace, PlaceDetail } from '../navigation/routes';
 import PlaceItem from '../components/PlaceItem';
+import { loadPlaces } from '../store/actions/places-actions';
 
 type Props = {
     navigation: any;
 };
 
 const PlacesListScreen = (props: Props) => {
-
+    const dispatch = useDispatch();
     const places = useSelector((state: RootState) => {
-        console.log('The state!', state);
+        console.log('The places are => ', state.places);
         return state.places.places;
     });
     const renderPlace = (place: Place) => {
         return (
-            <PlaceItem place={place} />
+            <PlaceItem
+                place={place}
+                onSelect={onSelectedPlace}
+            />
         )
     };
+    const onSelectedPlace = (place: Place) => {
+        props.navigation.navigate(PlaceDetail, {
+            place: place
+        });
+    };
+
+    useEffect(() => {
+        dispatch(loadPlaces());
+    }, [dispatch]);
 
     if (!places || places.length === 0) {
         return (
