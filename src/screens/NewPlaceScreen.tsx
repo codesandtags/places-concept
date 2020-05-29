@@ -8,6 +8,7 @@ import { PlaceDetail, PlacesList } from '../navigation/routes';
 import FormStyles from '../styles/Forms';
 import { useDispatch } from 'react-redux';
 import { addPlace } from '../store/actions/places-actions';
+import ButtonStyles from '../styles/Buttons';
 
 type Props = {
     navigation: any;
@@ -42,6 +43,8 @@ const NewPlaceScreen = (props: Props) => {
                     />
                 </View>
                 <Button
+                    style={ButtonStyles.customButton}
+                    mode="contained"
                     color={Colors.primaryColor}
                     onPress={handleSavePlace}
                 >
@@ -51,6 +54,12 @@ const NewPlaceScreen = (props: Props) => {
         </ScrollView>
     )
 };
+
+export const optionsNewPlace = (props: any) => {
+    return {
+        title: 'New Place',
+    }
+}
 
 const styles = StyleSheet.create({
     screen: {

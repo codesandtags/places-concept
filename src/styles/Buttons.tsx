@@ -4,6 +4,7 @@ const ButtonStyles = StyleSheet.create({
     customButton: {
         width: '50%',
         borderRadius: 0,
+        alignSelf: 'center'
     }
 });
 

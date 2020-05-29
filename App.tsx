@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider as StoreProvider} from 'react-redux';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { AppLoading } from 'expo';
+import * as Fonts from 'expo-font';
+
 import reduxThunk from 'redux-thunk';
 
 import MainNavigator from './src/navigation/MainNavigator';
+import { placesReducer } from './src/store/reducers/places-reducer';
 
 import Colors from './src/constants/Colors';
-import { placesReducer } from './src/store/reducers/places-reducer';
+import { FONT_BOLD, FONT_REGULAR } from './src/constants/Fonts';
 
 const rootReducer = combineReducers({
     places: placesReducer
@@ -24,7 +28,24 @@ const theme = {
     },
 };
 
+const fetchFonts = () => {
+    return Fonts.loadAsync({
+        [FONT_REGULAR]: require('./assets/fonts/Montserrat-Regular.ttf'),
+        [FONT_BOLD]: require('./assets/fonts/Montserrat-Bold.ttf'),
+    });
+}
 export default function App() {
+
+    const [fontsLoaded, setFontsLoaded] = useState(false);
+    if (!fontsLoaded) {
+        return (
+            <AppLoading
+                startAsync={fetchFonts}
+                onFinish={() => setFontsLoaded(true)}
+            />
+        );
+    }
+
     return (
         <StoreProvider store={store}>
             <PaperProvider theme={theme}>
